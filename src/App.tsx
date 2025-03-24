@@ -6,7 +6,6 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Index from "./pages/Index";
 import DemoMode from "./pages/DemoMode";
 import Login from "./pages/Login";
-import CreatePassword from "./pages/CreatePassword";
 import HomePage from "./pages/HomePage";
 import WalletPage from "./pages/WalletPage";
 import CryptoDetailPage from "./pages/CryptoDetailPage";
@@ -18,7 +17,6 @@ import { createBrowserRouter } from "react-router-dom";
 import LoginPage from "./pages/LoginPage";
 import VerifyCode from "./pages/VerifyCode";
 import GenerateAddressPage from "./pages/GenerateAddressPage";
-import CreatePasswordPage from "./pages/CreatePassword";
 
 const queryClient = new QueryClient();
 
@@ -35,10 +33,6 @@ const App = () => {
     {
       path: "/verify-code",
       element: <VerifyCode />,
-    },
-    {
-      path: "/create-password",
-      element: <CreatePasswordPage />,
     },
     {
       path: "/home",
