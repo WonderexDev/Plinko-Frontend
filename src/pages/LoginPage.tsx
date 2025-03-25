@@ -37,7 +37,7 @@ const LoginPage = () => {
   const handleStart = (e: React.FormEvent) => {
     e.preventDefault();
     if (password.length >= 8) {
-      navigate("/");
+      navigate("/home");
     } else {
       toast({
         title: "Invalid Password",
