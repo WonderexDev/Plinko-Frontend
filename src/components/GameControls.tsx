@@ -3,6 +3,7 @@ import { cn } from "@/lib/utils";
 import { Wallet, Flame } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useNavigate } from "react-router-dom";
+import { MessageSquare, Music, MoreVertical, Plus, Minus } from "lucide-react";
 
 const wallet = (
   <svg
@@ -103,16 +104,31 @@ interface GameControlsProps {
   demo?: boolean;
   showBonus?: boolean;
   setShowBonus?: (show: boolean) => void;
+  fund: boolean;
+  isSimulating?: boolean;
+  setIsSimulating?: (simulating: boolean) => void;
+  activeMode?: "manual" | "auto";
+  setActiveMode?: (mode: "manual" | "auto") => void;
+  autoCount?: number;
+  setAutoCount?: (count: number) => void;
+  handlePlaceBet?: () => void;
 }
 
 const GameControls: React.FC<GameControlsProps> = ({
   demo,
   showBonus,
   setShowBonus,
+  fund,
+  isSimulating,
+  setIsSimulating,
+  activeMode,
+  setActiveMode,
+  autoCount,
+  setAutoCount,
+  handlePlaceBet,
 }) => {
   const [mode, setMode] = useState<"manual" | "auto">("manual");
   const [showBonusAlert, setShowBonusAlert] = useState(true);
-  const [activeMode, setActiveMode] = useState<"manual" | "auto">("manual");
 
   const navigate = useNavigate();
 
@@ -202,25 +218,43 @@ const GameControls: React.FC<GameControlsProps> = ({
             {/* Mode Selector */}
             <div className="grid grid-cols-2 w-full gap-1 bg-black/50 rounded-lg backdrop-blur-sm p-1">
               <button
-                className={`rounded-md text-white font-medium transition-colors p-2 ${
+                className={`rounded-md font-medium transition-colors p-2 ${
                   activeMode === "manual"
-                    ? "bg-pink-400 shadow-md"
-                    : "bg-transparent hover:bg-white/10"
+                    ? "bg-pink-400 shadow-md text-black"
+                    : "bg-transparent hover:bg-white/10 text-white"
                 }`}
                 onClick={() => setActiveMode("manual")}
               >
                 Manual
               </button>
-              <button
-                className={`rounded-md text-white font-medium transition-colors p-2 ${
+              <div
+                className={`py-3 flex items-center justify-center rounded-md ${
                   activeMode === "auto"
-                    ? "bg-pink-400 shadow-md"
-                    : "bg-transparent hover:bg-white/10"
+                    ? "bg-pink-400 shadow-md text-black"
+                    : "bg-transparent hover:bg-white/10 text-white"
                 }`}
-                onClick={() => setActiveMode("auto")}
               >
-                Auto
-              </button>
+                {activeMode === "auto" ? (
+                  <div className="flex items-center justify-between w-full px-4">
+                    <button
+                      onClick={() => setAutoCount(Math.max(1, autoCount - 1))}
+                    >
+                      <Minus className="w-4 h-4" />
+                    </button>
+                    <span className="font-medium">Auto ({autoCount})</span>
+                    <button onClick={() => setAutoCount(autoCount + 1)}>
+                      <Plus className="w-4 h-4" />
+                    </button>
+                  </div>
+                ) : (
+                  <button
+                    className="w-full text-center"
+                    onClick={() => setActiveMode("auto")}
+                  >
+                    Auto
+                  </button>
+                )}
+              </div>
             </div>
             <div className="flex gap-2 flex-1 w-full">
               <div className="bg-black/50 p-1 mx-auto w-1/2 rounded-xl backdrop-blur-sm  hover:bg-black/40 transition-colors">
@@ -246,25 +280,56 @@ const GameControls: React.FC<GameControlsProps> = ({
             </div>
 
             {/* Betting Controls */}
-            <div className="bg-black/50 px-2 py-1 w-full rounded-xl backdrop-blur-sm border border-white/5">
-              <div className="flex justify-between items-center">
+            <div
+              className={`bg-black/50 px-2 py-1 w-full rounded-xl backdrop-blur-sm border border-white/5 ${
+                !fund ? "border border-pink-400/50" : ""
+              }`}
+            >
+              <div className={`flex justify-between items-center `}>
                 <div className="flex gap-2 items-center">
                   <div>{Bet}</div>
                   <div>
                     <div className="text-white text-lg md:text-xl font-medium">
-                      0
+                      0.0015
                     </div>
-                    <div className="text-xs text-gray-300">Bet Amount</div>
+                    <div
+                      className={`text-xs text-gray-300 ${
+                        !fund ? "text-pink-400" : ""
+                      }`}
+                    >
+                      {fund ? "Bet Amount" : "No enough balance"}
+                    </div>
                   </div>
                 </div>
-                <div className="flex gap-2">
-                  <button className="bg-white/20 text-white text-xl px-2 py-1 rounded-md hover:bg-white/30 transition-colors">
+                <div className="flex gap-2 ">
+                  <button
+                    className={`bg-white/20 text-white text-xl px-2 py-1 rounded-md transition-colors ${
+                      !fund
+                        ? "opacity-50 cursor-not-allowed"
+                        : "hover:bg-white/30"
+                    }`}
+                    disabled={!fund}
+                  >
                     1/2
                   </button>
-                  <button className="bg-white/20 text-white text-xl px-2 py-1 rounded-md hover:bg-white/30 transition-colors">
+                  <button
+                    className={`bg-white/20 text-white text-xl px-2 py-1 rounded-md transition-colors ${
+                      !fund
+                        ? "opacity-50 cursor-not-allowed"
+                        : "hover:bg-white/30"
+                    }`}
+                    disabled={!fund}
+                  >
                     2x
                   </button>
-                  <button className="bg-white/20 text-white text-xl px-2 py-1 rounded-md hover:bg-white/30 transition-colors">
+                  <button
+                    className={`bg-white/20 text-white text-xl px-2 py-1 rounded-md transition-colors ${
+                      !fund
+                        ? "opacity-50 cursor-not-allowed"
+                        : "hover:bg-white/30"
+                    }`}
+                    disabled={!fund}
+                  >
                     MAX
                   </button>
                 </div>
@@ -273,10 +338,31 @@ const GameControls: React.FC<GameControlsProps> = ({
           </div>
           {/* Fund Wallet Button */}
           <Button
-            onClick={() => navigate("/wallet")}
-            className="w-full bg-[#3a2a40]/30 backdrop-blur-sm text-darkgray py-3 rounded-xl   shadow-lg hover:bg-pink-400/90 transition-colors font-medium"
+            onClick={() => {
+              if (fund) {
+                // Handle place bet logic here
+                if (activeMode === "manual") {
+                  // Place manual bet logic
+                  handlePlaceBet();
+                } else {
+                  // Start auto bet logic
+                  setIsSimulating(true);
+                }
+              } else {
+                navigate("/wallet");
+              }
+            }}
+            className={`w-full ${
+              fund ? "bg-pink-400/90" : "bg-[#3a2a40]/30"
+            } backdrop-blur-sm text-darkgray py-3 rounded-xl shadow-lg hover:bg-pink-400/90 transition-colors font-medium`}
           >
-            Please fund your wallet
+            {!fund
+              ? "Please fund your wallet"
+              : activeMode === "manual"
+              ? "Place Bet"
+              : isSimulating
+              ? "Running..."
+              : "Start Autobet"}
           </Button>
         </div>
       )}

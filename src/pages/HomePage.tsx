@@ -16,13 +16,25 @@ const HomePage = () => {
       {/* Main container with 80% width */}
       <div className="w-[90%] max-w-md h-[100vh]">
         {/* Header */}
-        <Header demo={true} />
+        <Header demo={true} auth={true} />
 
         {/* Game Board */}
         <GameBoard />
 
         {/* Game Controls */}
-        <GameControls demo={false} showBonus={false} setShowBonus={() => {}} />
+        <GameControls
+          demo={false}
+          showBonus={false}
+          setShowBonus={() => {}}
+          fund={false}
+          isSimulating={false}
+          setIsSimulating={() => {}}
+          activeMode={activeMode}
+          setActiveMode={setActiveMode}
+          autoCount={0}
+          setAutoCount={() => {}}
+          handlePlaceBet={() => {}}
+        />
       </div>
     </div>
   );

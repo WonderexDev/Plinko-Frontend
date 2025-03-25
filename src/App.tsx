@@ -12,7 +12,6 @@ import CryptoDetailPage from "./pages/CryptoDetailPage";
 import DepositAddressPage from "./pages/DepositAddressPage";
 import FundedHomePage from "./pages/FundedHomePage";
 import ChatPage from "./pages/ChatPage";
-import { MusicPlayer } from "./components/MusicPlayer";
 import { createBrowserRouter } from "react-router-dom";
 import LoginPage from "./pages/LoginPage";
 import VerifyCode from "./pages/VerifyCode";
@@ -56,10 +55,6 @@ const App = () => {
     {
       path: "/chat",
       element: <ChatPage />,
-    },
-    {
-      path: "/music",
-      element: <MusicPlayer isOpen={true} standalone={true} />,
     },
   ]);
 

@@ -105,7 +105,7 @@ const BonusDialog: React.FC<BonusDialogProps> = ({
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               placeholder="your.email@provider.com"
-              className="w-full bg-white/10 text-white p-4 rounded-xl border border-white/10 focus:border-pink-400 focus:ring-1 focus:ring-pink-400 transition-all"
+              className="w-full bg-white/10 text-center text-white p-4 rounded-xl border border-white/10 focus:border-pink-400 focus:ring-1 focus:ring-pink-400 transition-all"
             />
           </div>
         </div>

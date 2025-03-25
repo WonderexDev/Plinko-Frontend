@@ -1,18 +1,16 @@
-
-import React, { useState } from 'react';
-import { Input } from '@/components/ui/input';
-import { Button } from '@/components/ui/button';
-import { useNavigate } from 'react-router-dom';
+import React, { useState } from "react";
+import { Button } from "@/components/ui/button";
 import { useToast } from "@/hooks/use-toast";
 
 const LoginPage = () => {
-  const navigate = useNavigate();
   const { toast } = useToast();
-  const [email, setEmail] = useState('');
+  const [email, setEmail] = useState("");
+  const [showPassword, setShowPassword] = useState(false);
+  const [password, setPassword] = useState("");
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleEmailSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    if (!email.includes('@')) {
+    if (!email.includes("@")) {
       toast({
         title: "Invalid email",
         description: "Please enter a valid email address",
@@ -20,38 +18,47 @@ const LoginPage = () => {
       });
       return;
     }
-    // In a real app, this would validate the email and send a code
-    navigate('/verify-code');
+
+    localStorage.setItem("userEmail", email);
+    setEmail(email);
+    setShowPassword(true);
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-plinko-primary to-plinko-background p-4">
-      <div className="max-w-md mx-auto pt-20">
-        <h1 className="text-3xl font-bold text-white mb-8 text-center">Welcome Back!</h1>
-        
-        <form onSubmit={handleSubmit} className="space-y-6">
-          <div>
-            <label className="block text-sm font-medium text-gray-200 mb-2">
-              Email Address
-            </label>
-            <Input
-              type="email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              className="bg-white bg-opacity-10 border-none text-white"
-              placeholder="your.email@example.com"
-              required
-            />
-          </div>
-          
-          <Button 
+    <div
+      className={`min-h-screen w-[100vw] bg-gradient-to-b from-[#3a2a40] to-[#2a1a30] border-none p-0 mx-auto overflow-hidden `}
+    >
+      <div className="flex w-full flex-col items-center justify-center p-8 h-screen gap-8">
+        <div className="h-1/2 flex flex-col items-center justify-center">
+          <h2 className="text-white text-2xl font-bold text-center mb-2">
+            Welcome to Plinko
+          </h2>
+          <p className="text-gray-300 text-center mb-6">
+            Enter your Email to start playing
+          </p>
+        </div>
+        <div className="w-full space-y-4 p-4 h-1/2 flex flex-col items-start justify-start">
+          <div className="text-white text-center mx-auto">Your Email</div>
+          <input
+            type="email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            placeholder="your.email@provider.com"
+            className="w-full bg-white/10 text-center text-white p-4 rounded-xl border border-white/10 focus:border-pink-400 focus:ring-1 focus:ring-pink-400 transition-all"
+          />
+        </div>
+        <div className="w-full absolute bottom-10 p-4">
+          <Button
+            onClick={handleEmailSubmit}
             type="submit"
-            className="w-full bg-plinko-accent text-white"
+            className="w-full bg-pink-400 hover:bg-pink-500 text-white py-4 rounded-xl font-medium transition-all"
           >
-            Continue with Email
+            Continue
           </Button>
-        </form>
+        </div>
       </div>
+
+      <div className={`display: ${showPassword ? "block" : "hidden"}`}></div>
     </div>
   );
 };

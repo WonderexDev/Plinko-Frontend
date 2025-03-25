@@ -83,7 +83,7 @@ const DemoMode = () => {
         }}
       >
         {/* Header */}
-        <Header demo={true} />
+        <Header demo={true} auth={false} />
 
         {/* Game Board */}
         <GameBoard />
