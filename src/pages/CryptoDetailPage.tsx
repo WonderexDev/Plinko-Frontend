@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { useNavigate, useLocation } from "react-router-dom";
 import { ChevronLeft, ArrowUpDown } from "lucide-react";
+import { Colors } from "@/constants/colors";
 
 const icons = {
   sol: (
@@ -221,7 +222,9 @@ const CryptoDetailPage = () => {
                 <ArrowUpDown className="w-4 h-4" />
               </div>
             </div>
-            <div className="text-xs text-gray-400 mt-1 ml-1">
+            <div
+              className={` text-[#FF80CF]/80 text-xs text-gray-400 mt-1 ml-1`}
+            >
               {depositAmount === ""
                 ? "+150% Deposite Bonus Applied 🤑"
                 : "Deposite Amount"}
@@ -232,8 +235,8 @@ const CryptoDetailPage = () => {
             onClick={handleDepositClick}
             className={`w-full ${
               depositAmount === "" || depositAmount === "0"
-                ? "bg-[#3a2a40] hover:bg-[#4a3a50]"
-                : "bg-gradient-to-r from-pink-500 to-pink-600 hover:from-pink-600 hover:to-pink-700"
+                ? "bg-[#3a2a40] hover:bg-[#4a3a50] "
+                : ` ${Colors.pink_bg} ${Colors.pink_button}  hover:from-pink-600 hover:to-pink-700`
             }  text-gray-300 py-3 rounded-xl border border-[#4a3a50]`}
           >
             {depositAmount === "" && "Fill the amount to Deposit"}
@@ -293,7 +296,7 @@ const CryptoDetailPage = () => {
             className={`w-full ${
               withdrawAmount === "" || withdrawAmount === "0"
                 ? "bg-[#3a2a40] hover:bg-[#4a3a50]"
-                : "bg-gradient-to-r from-pink-500 to-pink-600 hover:from-pink-600 hover:to-pink-700"
+                : `${Colors.pink_bg} ${Colors.pink_button} hover:from-pink-600 hover:to-pink-700`
             }  text-gray-300 py-3 rounded-xl border border-[#4a3a50]`}
           >
             {withdrawAmount === "" && "Fill the fields to Withdraw"}

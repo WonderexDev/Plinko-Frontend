@@ -10,6 +10,8 @@ import CreatePasswordDialog from "@/components/demo/CreatePasswordDialog";
 import RegionBlock from "@/components/RegionBlock";
 import AddHome from "@/components/demo/AddHome";
 
+import backgroundImage from "/background.png";
+
 const DemoMode = () => {
   const navigate = useNavigate();
   const { toast } = useToast();
@@ -22,6 +24,7 @@ const DemoMode = () => {
   const [error, setError] = useState("");
   const [showTap, setShowTap] = useState(false);
   const [showBonus, setShowBonus] = useState(false);
+  const [activeMode, setActiveMode] = useState<"manual" | "auto">("manual");
 
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
@@ -74,7 +77,14 @@ const DemoMode = () => {
   };
 
   return (
-    <div className="bg-gradient-to-b from-pink-500 to-purple-900 flex justify-center items-center">
+    <div
+      className="flex justify-center items-center"
+      style={{
+        backgroundImage: `url(${backgroundImage})`,
+        backgroundSize: "cover",
+        backgroundPosition: "center",
+      }}
+    >
       {/* Main container with 80% width */}
       <div
         className="w-[90%] max-w-md h-[100vh]"
@@ -86,7 +96,7 @@ const DemoMode = () => {
         <Header demo={true} auth={false} />
 
         {/* Game Board */}
-        <GameBoard />
+        <GameBoard demo={true} />
 
         {/* Game Controls */}
         <GameControls
@@ -96,8 +106,8 @@ const DemoMode = () => {
           fund={false}
           isSimulating={false}
           setIsSimulating={() => {}}
-          activeMode={null}
-          setActiveMode={() => {}}
+          activeMode={activeMode}
+          setActiveMode={setActiveMode}
           autoCount={0}
           setAutoCount={() => {}}
           handlePlaceBet={() => {}}

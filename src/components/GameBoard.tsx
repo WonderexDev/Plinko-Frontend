@@ -1,5 +1,6 @@
 import React from "react";
 import { cn } from "@/lib/utils";
+import { Colors } from "@/constants/colors";
 
 // Generate dots for the Plinko board with exact arrangement from the image
 const renderPlinkoBoard = () => {
@@ -179,18 +180,18 @@ const GameBoard: React.FC<GameBoardProps> = ({ demo }) => {
       <div className="grid gap-3 md:gap-4 py-3">{renderPlinkoBoard()}</div>
 
       {/* Multipliers */}
-      <div className="flex justify-between mb-4 overflow-x-auto mt-2 w-full px-2">
+      <div className="flex justify-between mb-4 overflow-x-auto mt-2 w-full ">
         {multipliers.map((multiplier, index) => (
           <button
             key={index}
             className={cn(
-              "bg-plinko-accent text-white py-1 text-sm ",
+              `bg-plinko-accent py-1 text-sm ${Colors.pink_bg} ${Colors.pink_button}`,
               index === 0 &&
                 "rounded-tl-xl rounded-bl-xl rounded-tr-md rounded-br-md", // Only left side
               index === multipliers.length - 1 &&
                 "rounded-tr-xl rounded-br-xl rounded-tl-md rounded-bl-md", // Only right side
               index !== 0 && index !== multipliers.length - 1 && "rounded-md", // Middle items
-              demo && "px-2",
+              demo && "px-1",
               !demo && "px-0"
             )}
             style={{ width: multiplier.width }}

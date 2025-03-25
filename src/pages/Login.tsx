@@ -10,7 +10,7 @@ const Login = () => {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     // In a real app, you would authenticate the user here
-    navigate("/demo-mode");
+    navigate("/home");
   };
 
   return (

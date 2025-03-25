@@ -1,6 +1,4 @@
 import { useState, useEffect, useRef, useCallback } from "react";
-import { MessageSquare, Music, MoreVertical, Plus, Minus } from "lucide-react";
-import { useNavigate } from "react-router-dom";
 import type Matter from "matter-js";
 import {
   Bodies,
@@ -17,6 +15,8 @@ import {
 import Header from "@/components/Header";
 import GameFundBoard from "@/components/GameFundBoard";
 import GameControls from "@/components/GameControls";
+
+import backgroundImage from "/background.png";
 
 type ModeType = "manual" | "auto";
 
@@ -192,7 +192,14 @@ const FundedHomePage = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-pink-500 to-purple-900 bg-cover bg-center flex flex-col p-4">
+    <div
+      className="bg-cover bg-center flex flex-col p-4"
+      style={{
+        backgroundImage: `url(${backgroundImage})`,
+        backgroundSize: "cover",
+        backgroundPosition: "center",
+      }}
+    >
       {/* [url('/plinko.webp')] */}
       <Header demo={false} auth={true} />
       <GameFundBoard

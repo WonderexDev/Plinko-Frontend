@@ -1,9 +1,9 @@
 import React, { useState } from "react";
-import { cn } from "@/lib/utils";
-import { Wallet, Flame } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useNavigate } from "react-router-dom";
-import { MessageSquare, Music, MoreVertical, Plus, Minus } from "lucide-react";
+import { Plus, Minus } from "lucide-react";
+
+import { Colors } from "@/constants/colors";
 
 const wallet = (
   <svg
@@ -146,28 +146,28 @@ const GameControls: React.FC<GameControlsProps> = ({
               </div>
             )}
             {/* Mode Selector */}
-            <div className="grid grid-cols-3 w-full gap-1 bg-black/20 rounded-lg backdrop-blur-sm p-1">
+            <div className="grid grid-cols-3 w-full gap-1 bg-black/10 rounded-lg backdrop-blur-xl p-1">
               <button
-                className={`rounded-md text-white font-medium transition-colors ${
+                className={`rounded-md font-medium transition-colors ${
                   activeMode === "manual"
-                    ? "bg-pink-400 shadow-md"
-                    : "bg-transparent hover:bg-white/10"
+                    ? `${Colors.pink_bg} shadow-md  ${Colors.pink_button}`
+                    : "bg-transparent hover:bg-white/10 text-white"
                 }`}
                 onClick={() => setActiveMode("manual")}
               >
                 Manual
               </button>
               <button
-                className={`rounded-md text-white font-medium transition-colors ${
+                className={`rounded-md  font-medium transition-colors ${
                   activeMode === "auto"
-                    ? "bg-pink-400 shadow-md"
-                    : "bg-transparent hover:bg-white/10"
+                    ? `${Colors.pink_bg} shadow-md ${Colors.pink_button}`
+                    : "bg-transparent hover:bg-white/10 text-white"
                 }`}
                 onClick={() => setActiveMode("auto")}
               >
                 Auto
               </button>
-              <div className="bg-black/30 px-2 mx-auto w-full rounded-xl backdrop-blur-sm  hover:bg-black/40 transition-colors">
+              <div className="bg-black/10 px-2 mx-auto w-full rounded-xl backdrop-blur-xl  hover:bg-black/40 transition-colors">
                 <div className="flex items-center gap-2 mx-auto justify-center">
                   <div className=" p-1.5 rounded-md">{Risk}</div>
                   <div>
@@ -179,27 +179,34 @@ const GameControls: React.FC<GameControlsProps> = ({
             </div>
 
             {/* Betting Controls */}
-            <div className="bg-black/30 px-2 py-1 w-full rounded-xl backdrop-blur-sm border border-white/5">
-              <div className="flex justify-between items-center">
-                <div className="flex gap-2 items-center">
-                  <div>{Bet}</div>
-                  <div>
-                    <div className="text-white text-lg md:text-xl font-medium">
-                      0
+            <div className="flex items-center w-full gap-2">
+              <div className="bg-black/10 px-2 py-1 rounded-xl backdrop-blur-sm border border-white/5">
+                <div className="flex justify-between items-center gap-8 px-4">
+                  <div className="flex gap-2 items-center">
+                    <div>{Bet}</div>
+                    <div>
+                      <div className="text-white text-lg md:text-xl font-medium">
+                        0
+                      </div>
+                      <div className="text-xs text-gray-300">Ballence : 0</div>
                     </div>
-                    <div className="text-xs text-gray-300">Ballence : 0</div>
+                  </div>
+                  <div className="flex gap-2">
+                    <button className="bg-black/25 text-white text-xs px-2 py-2 rounded-md hover:bg-white/30 transition-colors">
+                      1/2
+                    </button>
+                    <button className="bg-black/25 text-white text-xs px-2 py-2 rounded-md hover:bg-white/30 transition-colors">
+                      2x
+                    </button>
+                    <button className="bg-black/25 text-white text-xs px-2 py-2 rounded-md hover:bg-white/30 transition-colors">
+                      MAX
+                    </button>
                   </div>
                 </div>
-                <div className="flex gap-2">
-                  <button className="bg-white/20 text-white text-xs px-2 py-1 rounded-md hover:bg-white/30 transition-colors">
-                    1/2
-                  </button>
-                  <button className="bg-white/20 text-white text-xs px-2 py-1 rounded-md hover:bg-white/30 transition-colors">
-                    2x
-                  </button>
-                  <button className="bg-white/20 text-white text-xs px-2 py-1 rounded-md hover:bg-white/30 transition-colors">
-                    MAX
-                  </button>
+              </div>
+              <div className="bg-black/10 p-1 mx-auto  rounded-xl backdrop-blur-xl  hover:bg-black/40 transition-colors">
+                <div className="flex items-center gap-2 ">
+                  <div className=" p-1.5 rounded-md">{wallet}</div>
                 </div>
               </div>
             </div>
@@ -207,7 +214,7 @@ const GameControls: React.FC<GameControlsProps> = ({
           {/* Fund Wallet Button */}
           <Button
             onClick={() => setShowBonus(true)}
-            className="w-full bg-pink-400/70 backdrop-blur-sm text-darkgray py-3 rounded-xl border border-pink-400/30 shadow-lg hover:bg-pink-400/90 transition-colors font-medium"
+            className={`w-full ${Colors.pink_bg} backdrop-blur-sm ${Colors.pink_button} py-3 rounded-xl border border-pink-400/30 shadow-lg hover:bg-pink-400/90 transition-colors font-medium`}
           >
             Get Deposite Bonus
           </Button>
@@ -216,11 +223,11 @@ const GameControls: React.FC<GameControlsProps> = ({
         <div className="h-[22%] md:h-[20%] ">
           <div className="space-y-3 relative mb-8 mt-8 h-[80%] items-center flex-col justify-center flex">
             {/* Mode Selector */}
-            <div className="grid grid-cols-2 w-full gap-1 bg-black/50 rounded-lg backdrop-blur-sm p-1">
+            <div className="grid grid-cols-2 w-full gap-1 bg-black/10 rounded-lg backdrop-blur-xl p-1">
               <button
                 className={`rounded-md font-medium transition-colors p-2 ${
                   activeMode === "manual"
-                    ? "bg-pink-400 shadow-md text-black"
+                    ? `${Colors.pink_bg} shadow-md ${Colors.pink_button}`
                     : "bg-transparent hover:bg-white/10 text-white"
                 }`}
                 onClick={() => setActiveMode("manual")}
@@ -230,7 +237,7 @@ const GameControls: React.FC<GameControlsProps> = ({
               <div
                 className={`py-3 flex items-center justify-center rounded-md ${
                   activeMode === "auto"
-                    ? "bg-pink-400 shadow-md text-black"
+                    ? `${Colors.pink_bg} shadow-md ${Colors.pink_button}`
                     : "bg-transparent hover:bg-white/10 text-white"
                 }`}
               >
@@ -257,7 +264,7 @@ const GameControls: React.FC<GameControlsProps> = ({
               </div>
             </div>
             <div className="flex gap-2 flex-1 w-full">
-              <div className="bg-black/50 p-1 mx-auto w-1/2 rounded-xl backdrop-blur-sm  hover:bg-black/40 transition-colors">
+              <div className="bg-black/10 p-1 mx-auto w-1/2 rounded-xl backdrop-blur-xl  hover:bg-black/40 transition-colors">
                 <div className="flex items-center gap-2 ">
                   <div className=" p-1.5 rounded-md">{wallet}</div>
                   <div>
@@ -268,7 +275,7 @@ const GameControls: React.FC<GameControlsProps> = ({
                   </div>
                 </div>
               </div>
-              <div className="bg-black/50 p-1 mx-auto w-1/2 rounded-xl backdrop-blur-sm  hover:bg-black/40 transition-colors">
+              <div className="bg-black/10 p-1 mx-auto w-1/2 rounded-xl backdrop-blur-xl  hover:bg-black/40 transition-colors">
                 <div className="flex items-center gap-2 mx-auto justify-center">
                   <div className=" p-1.5 rounded-md">{Risk}</div>
                   <div>
@@ -281,8 +288,8 @@ const GameControls: React.FC<GameControlsProps> = ({
 
             {/* Betting Controls */}
             <div
-              className={`bg-black/50 px-2 py-1 w-full rounded-xl backdrop-blur-sm border border-white/5 ${
-                !fund ? "border border-pink-400/50" : ""
+              className={`bg-black/10 px-2 py-1 w-full rounded-xl backdrop-blur-xl ${
+                !fund ? "border-2 border-pink-400/50" : ""
               }`}
             >
               <div className={`flex justify-between items-center `}>
@@ -303,7 +310,7 @@ const GameControls: React.FC<GameControlsProps> = ({
                 </div>
                 <div className="flex gap-2 ">
                   <button
-                    className={`bg-white/20 text-white text-xl px-2 py-1 rounded-md transition-colors ${
+                    className={`bg-black/25 text-white text-xl px-2 py-1 rounded-md transition-colors ${
                       !fund
                         ? "opacity-50 cursor-not-allowed"
                         : "hover:bg-white/30"
@@ -313,7 +320,7 @@ const GameControls: React.FC<GameControlsProps> = ({
                     1/2
                   </button>
                   <button
-                    className={`bg-white/20 text-white text-xl px-2 py-1 rounded-md transition-colors ${
+                    className={`bg-black/25 text-white text-xl px-2 py-1 rounded-md transition-colors ${
                       !fund
                         ? "opacity-50 cursor-not-allowed"
                         : "hover:bg-white/30"
@@ -323,7 +330,7 @@ const GameControls: React.FC<GameControlsProps> = ({
                     2x
                   </button>
                   <button
-                    className={`bg-white/20 text-white text-xl px-2 py-1 rounded-md transition-colors ${
+                    className={`bg-black/25 text-white text-xl px-2 py-1 rounded-md transition-colors ${
                       !fund
                         ? "opacity-50 cursor-not-allowed"
                         : "hover:bg-white/30"
@@ -353,8 +360,10 @@ const GameControls: React.FC<GameControlsProps> = ({
               }
             }}
             className={`w-full ${
-              fund ? "bg-pink-400/90" : "bg-[#3a2a40]/30"
-            } backdrop-blur-sm text-darkgray py-3 rounded-xl shadow-lg hover:bg-pink-400/90 transition-colors font-medium`}
+              fund
+                ? `${Colors.pink_bg} ${Colors.pink_button} text-xl`
+                : "bg-[#FFFFFF]/30 text-white/30 "
+            } backdrop-blur-sm  py-3 rounded-xl shadow-lg hover:bg-pink-400/90 transition-colors font-medium`}
           >
             {!fund
               ? "Please fund your wallet"

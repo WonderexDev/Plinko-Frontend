@@ -8,6 +8,7 @@ import { Input } from "@/components/ui/input";
 import { Badge } from "@/components/ui/badge";
 import { motion, AnimatePresence } from "framer-motion";
 import { useNavigate } from "react-router-dom";
+import { Colors } from "@/constants/colors";
 
 type ChatTab = "chat" | "bets";
 
@@ -485,9 +486,9 @@ const ChatPage = () => {
           <div className="items-center flex justify-center  border-gradient-to-b from-purple-500 to-white-500 p-4">
             <Button
               onClick={handleBackToPlinko}
-              className="w-[80%] rounded-none rounded-md bg-purple-700 hover:bg-purple-600 text-white py-2 h-10 flex items-center justify-center gap-2"
+              className={`w-[80%] rounded-md ${Colors.back_button} hover:bg-purple-600 text-white py-3 h-10 flex items-center justify-center gap-2`}
             >
-              <ArrowLeft size={16} />
+              {/* <ArrowLeft size={16} /> */}
               <span>Back to Plinko</span>
             </Button>
           </div>
@@ -592,7 +593,7 @@ const ChatPage = () => {
                 onChange={(e) => setInputMessage(e.target.value)}
                 onKeyDown={handleKeyDown}
                 placeholder="Your message..."
-                className="flex-1 bg-gray-700 border-gray-600 text-white focus-visible:ring-purple-500"
+                className="flex-1 rounded-full bg-gray-700 border-gray-600 text-white focus-visible:ring-purple-500"
               />
               <Button
                 onClick={handleSendMessage}

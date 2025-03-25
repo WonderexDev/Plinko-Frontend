@@ -1,6 +1,7 @@
 import React from "react";
 import { ChevronLeft, Lock, ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { Colors } from "@/constants/colors";
 
 interface CreatePasswordDialogProps {
   showLogin: boolean;
@@ -68,14 +69,14 @@ const CreatePasswordDialog: React.FC<CreatePasswordDialogProps> = ({
         <Button
           onClick={handleBack}
           variant="outline"
-          className="px-6 py-5 w-[30%] rounded-xl bg-white/5 text-white border border-white/10 hover:bg-white/10 transition-all"
+          className="px-6 py-5 w-[30%] rounded-xl bg-white/10 text-white border border-white/10 hover:bg-white/10 transition-all"
         >
           <ChevronLeft className="w-4 h-4 mr-2" /> Back
         </Button>
 
         <Button
           onClick={(e) => handleStart(e)}
-          className="px-8 py-5 w-[80%] rounded-xl bg-plinko-accent text-white hover:bg-plinko-accent/90 transition-all flex items-center justify-center gap-2 shadow-lg shadow-plinko-accent/20"
+          className={`px-8 py-5 w-[80%] rounded-xl ${Colors.pink_bg} ${Colors.pink_button} hover:bg-plinko-accent/90 transition-all flex items-center justify-center gap-2 shadow-lg shadow-plinko-accent/20`}
         >
           Start Playing <ArrowRight className="w-4 h-4 ml-1" />
         </Button>
