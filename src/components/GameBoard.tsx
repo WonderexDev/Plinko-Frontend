@@ -54,8 +54,6 @@ const renderPlinkoBoard = () => {
       (dotsByRow[dotsByRow.length - 1].show +
         dotsByRow[dotsByRow.length - 1].hide);
 
-    console.log(w);
-
     const createDots = (count: number, keyPrefix: string, color: string) => {
       return Array.from({ length: count }).map((_, i) => (
         <div
@@ -92,7 +90,7 @@ const renderPlinkoBoard = () => {
 };
 
 // Multipliers
-const multipliers = [
+const demo_multipliers = [
   {
     label: "500%",
     width: "17%",
@@ -123,23 +121,77 @@ const multipliers = [
   },
 ];
 
-const GameBoard = () => {
+const pwa_multipliers = [
+  {
+    label: "10x",
+    width: "11%",
+  },
+  {
+    label: "5x",
+    width: "10%",
+  },
+  {
+    label: "2x",
+    width: "9%",
+  },
+  {
+    label: "1.5",
+    width: "8%",
+  },
+  {
+    label: "0.9",
+    width: "7%",
+  },
+  {
+    label: "0.7",
+    width: "6%",
+  },
+  {
+    label: "0.9",
+    width: "7%",
+  },
+  {
+    label: "1.5",
+    width: "8%",
+  },
+  {
+    label: "2x",
+    width: "9%",
+  },
+  {
+    label: "5x",
+    width: "10%",
+  },
+  {
+    label: "10x",
+    width: "11%",
+  },
+];
+
+interface GameBoardProps {
+  demo?: boolean;
+}
+
+const GameBoard: React.FC<GameBoardProps> = ({ demo }) => {
+  const multipliers = demo ? demo_multipliers : pwa_multipliers;
   return (
-    <div className="bg-[#540059]/30 backdrop-blur-lg rounded-2xl mb-4 border border-white/10 shadow-lg h-[48%] md:h-[50%] pt-2 md:pt-1 px-2">
+    <div className="bg-[#540059]/30 backdrop-blur-lg rounded-2xl mb-4 border border-white/10 shadow-lg h-[53%] md:h-[55%] pt-2 md:pt-1 px-2 items-center justify-center flex flex-col">
       <div className="grid gap-3 md:gap-4 py-3">{renderPlinkoBoard()}</div>
 
       {/* Multipliers */}
-      <div className="flex justify-between mb-4 overflow-x-auto mt-2 w-full">
+      <div className="flex justify-between mb-4 overflow-x-auto mt-2 w-full px-2">
         {multipliers.map((multiplier, index) => (
           <button
             key={index}
             className={cn(
-              "bg-plinko-accent text-white px-2 py-1 text-sm md:px-3",
+              "bg-plinko-accent text-white py-1 text-sm ",
               index === 0 &&
                 "rounded-tl-xl rounded-bl-xl rounded-tr-md rounded-br-md", // Only left side
               index === multipliers.length - 1 &&
                 "rounded-tr-xl rounded-br-xl rounded-tl-md rounded-bl-md", // Only right side
-              index !== 0 && index !== multipliers.length - 1 && "rounded-md" // Middle items
+              index !== 0 && index !== multipliers.length - 1 && "rounded-md", // Middle items
+              demo && "px-2",
+              !demo && "px-0"
             )}
             style={{ width: multiplier.width }}
           >

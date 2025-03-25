@@ -1,5 +1,3 @@
-"use client";
-
 import { useState, useEffect, useRef, useCallback } from "react";
 import { MessageSquare, Music, MoreVertical, Plus, Minus } from "lucide-react";
 import { useNavigate } from "react-router-dom";
@@ -18,6 +16,8 @@ import {
   Runner,
   World,
 } from "matter-js";
+
+import Header from "@/components/Header";
 
 type ModeType = "manual" | "auto";
 
@@ -289,81 +289,84 @@ const FundedHomePage = () => {
   }, []);
 
   // Handle collision with multiplier zones
- // ... existing code ...
+  // ... existing code ...
 
-// Handle collision with multiplier zones
-const handleCollision = useCallback((event: IEventCollision<Engine>) => {
-  const pairs = event.pairs;
+  // Handle collision with multiplier zones
+  const handleCollision = useCallback((event: IEventCollision<Engine>) => {
+    const pairs = event.pairs;
 
-  for (let i = 0; i < pairs.length; i++) {
-    const pair = pairs[i];
+    for (let i = 0; i < pairs.length; i++) {
+      const pair = pairs[i];
 
-    // Check if collision is between ball and multiplier zone
-    if (
-      (pair.bodyA.label.includes("ball-") &&
-        pair.bodyB.label.includes("multiplier-")) ||
-      (pair.bodyB.label.includes("ball-") &&
-        pair.bodyA.label.includes("multiplier-"))
-    ) {
-      const ball = pair.bodyA.label.includes("ball-")
-        ? pair.bodyA
-        : pair.bodyB;
-      const multiplier = pair.bodyA.label.includes("multiplier-")
-        ? pair.bodyA
-        : pair.bodyB;
+      // Check if collision is between ball and multiplier zone
+      if (
+        (pair.bodyA.label.includes("ball-") &&
+          pair.bodyB.label.includes("multiplier-")) ||
+        (pair.bodyB.label.includes("ball-") &&
+          pair.bodyA.label.includes("multiplier-"))
+      ) {
+        const ball = pair.bodyA.label.includes("ball-")
+          ? pair.bodyA
+          : pair.bodyB;
+        const multiplier = pair.bodyA.label.includes("multiplier-")
+          ? pair.bodyA
+          : pair.bodyB;
 
-      // Check if this ball has already been processed
-      if (ball.collisionFilter.group === 2) continue;
+        // Check if this ball has already been processed
+        if (ball.collisionFilter.group === 2) continue;
 
-      // Extract ball value and multiplier value
-      const ballValue = Number.parseFloat(ball.label.split("-")[1]);
-      const multiplierValue = multiplier.label.split("-")[1];
+        // Extract ball value and multiplier value
+        const ballValue = Number.parseFloat(ball.label.split("-")[1]);
+        const multiplierValue = multiplier.label.split("-")[1];
 
-      // Remove ball from world
-      if (engineRef.current) {
-        // Set collision filter to prevent further collisions
-        ball.collisionFilter.group = 2;
-        
-        // Immediately stop the ball's movement
-        Body.setVelocity(ball, { x: 0, y: 0 });
-        Body.setAngularVelocity(ball, 0);
-        
-        // Make the ball static so it doesn't move anymore
-        Body.setStatic(ball, true);
-        
-        // Position the ball at the center of the multiplier zone
-        const multiplierPos = multiplier.position;
-        Body.setPosition(ball, { x: multiplierPos.x, y: multiplierPos.y - 10 });
+        // Remove ball from world
+        if (engineRef.current) {
+          // Set collision filter to prevent further collisions
+          ball.collisionFilter.group = 2;
 
-        // Remove ball after a short delay to allow for visual feedback
-        setTimeout(() => {
-          if (engineRef.current) {
-            World.remove(engineRef.current.world, ball);
-            setInGameBallsCount((prev) => Math.max(0, prev - 1));
+          // Immediately stop the ball's movement
+          Body.setVelocity(ball, { x: 0, y: 0 });
+          Body.setAngularVelocity(ball, 0);
+
+          // Make the ball static so it doesn't move anymore
+          Body.setStatic(ball, true);
+
+          // Position the ball at the center of the multiplier zone
+          const multiplierPos = multiplier.position;
+          Body.setPosition(ball, {
+            x: multiplierPos.x,
+            y: multiplierPos.y - 10,
+          });
+
+          // Remove ball after a short delay to allow for visual feedback
+          setTimeout(() => {
+            if (engineRef.current) {
+              World.remove(engineRef.current.world, ball);
+              setInGameBallsCount((prev) => Math.max(0, prev - 1));
+            }
+          }, 500);
+
+          // Play sound effect (if available)
+          // const multiplierSound = new Audio(getMultiplierSound(multiplierValue));
+          // multiplierSound.volume = 0.2;
+          // multiplierSound.play();
+
+          // Update results
+          setResult(multiplierValue);
+          setLastMultipliers((prev) => [multiplierValue, ...prev.slice(0, 9)]);
+
+          // Calculate winnings (if bet was placed)
+          if (ballValue > 0) {
+            const winAmount = ballValue * Number.parseFloat(multiplierValue);
+            // Update balance or show winning notification
+            console.log(`Won ${winAmount} from bet of ${ballValue}`);
           }
-        }, 500);
-
-        // Play sound effect (if available)
-        // const multiplierSound = new Audio(getMultiplierSound(multiplierValue));
-        // multiplierSound.volume = 0.2;
-        // multiplierSound.play();
-
-        // Update results
-        setResult(multiplierValue);
-        setLastMultipliers((prev) => [multiplierValue, ...prev.slice(0, 9)]);
-
-        // Calculate winnings (if bet was placed)
-        if (ballValue > 0) {
-          const winAmount = ballValue * Number.parseFloat(multiplierValue);
-          // Update balance or show winning notification
-          console.log(`Won ${winAmount} from bet of ${ballValue}`);
         }
       }
     }
-  }
-}, []);
+  }, []);
 
-// ... existing code ...
+  // ... existing code ...
 
   // Drop a ball with the current bet amount
   const dropBall = useCallback(() => {
@@ -516,30 +519,7 @@ const handleCollision = useCallback((event: IEventCollision<Engine>) => {
   return (
     <div className="min-h-screen bg-[url('/plinko.webp')] bg-cover bg-center flex flex-col p-4">
       {/* Header */}
-      <div className="flex justify-between items-center mb-4">
-        <h1 className="text-2xl md:text-3xl font-bold text-white">Plinko!</h1>
-        <div className="flex items-center gap-2">
-          <button
-            onClick={() => setIsChatOpen(true)}
-            className="flex items-center gap-1 text-white bg-white/20 px-3 py-1 rounded-full text-sm backdrop-blur-md hover:bg-white/30 transition-colors"
-          >
-            <MessageSquare className="w-4 h-4" />
-            <span>14</span>
-          </button>
-          <button
-            onClick={() => setIsMusicPlayerOpen(true)}
-            className="text-white bg-white/20 p-1.5 rounded-full backdrop-blur-md hover:bg-white/30 transition-colors"
-          >
-            <Music className="w-4 h-4" />
-          </button>
-          <button
-            onClick={() => setIsMenuOpen(true)}
-            className="text-white bg-white/20 p-1.5 rounded-full backdrop-blur-md hover:bg-white/30 transition-colors"
-          >
-            <MoreVertical className="w-4 h-4" />
-          </button>
-        </div>
-      </div>
+      <Header demo={false} />
 
       {/* Main Content */}
       <div className="flex flex-col lg:flex-row gap-4 flex-1">
@@ -697,8 +677,8 @@ const handleCollision = useCallback((event: IEventCollision<Engine>) => {
               {activeMode === "manual"
                 ? "Place Bet"
                 : isSimulating
-                  ? "Running..."
-                  : "Start Autobet"}
+                ? "Running..."
+                : "Start Autobet"}
             </button>
           </div>
 
@@ -800,11 +780,6 @@ const handleCollision = useCallback((event: IEventCollision<Engine>) => {
 
       {/* Dialogs and Modals */}
       <ChatPanel isOpen={isChatOpen} onClose={() => setIsChatOpen(false)} />
-
-      <MusicPlayer
-        isOpen={isMusicPlayerOpen}
-        onOpenChange={setIsMusicPlayerOpen}
-      />
 
       {/* Menu Dialog */}
       <Dialog open={isMenuOpen} onOpenChange={setIsMenuOpen}>

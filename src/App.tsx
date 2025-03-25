@@ -16,7 +16,6 @@ import { MusicPlayer } from "./components/MusicPlayer";
 import { createBrowserRouter } from "react-router-dom";
 import LoginPage from "./pages/LoginPage";
 import VerifyCode from "./pages/VerifyCode";
-import GenerateAddressPage from "./pages/GenerateAddressPage";
 
 const queryClient = new QueryClient();
 
@@ -47,15 +46,11 @@ const App = () => {
       element: <CryptoDetailPage />,
     },
     {
-      path: "/generate-address",
-      element: <GenerateAddressPage />,
-    },
-    {
       path: "/funded-home",
       element: <FundedHomePage />,
     },
     {
-      path: "/deposit-address",
+      path: "/deposite",
       element: <DepositAddressPage />,
     },
     {

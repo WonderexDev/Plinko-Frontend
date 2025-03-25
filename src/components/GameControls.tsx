@@ -2,28 +2,21 @@ import React, { useState } from "react";
 import { cn } from "@/lib/utils";
 import { Wallet, Flame } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { useNavigate } from "react-router-dom";
 
 const wallet = (
   <svg
-    width="16"
-    height="16"
-    viewBox="0 0 24 24"
+    width="20"
+    height="18"
+    viewBox="0 0 20 18"
     fill="none"
     xmlns="http://www.w3.org/2000/svg"
   >
     <path
-      d="M21 12V7H3V19H21V14"
-      stroke="white"
-      strokeWidth="2"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-    />
-    <path
-      d="M16 14C17.1046 14 18 13.1046 18 12C18 10.8954 17.1046 10 16 10C14.8954 10 14 10.8954 14 12C14 13.1046 14.8954 14 16 14Z"
-      stroke="white"
-      strokeWidth="2"
-      strokeLinecap="round"
-      strokeLinejoin="round"
+      fillRule="evenodd"
+      clipRule="evenodd"
+      d="M2.87433 2.75C2.75669 2.74992 2.64024 2.77357 2.53194 2.81952C2.42364 2.86548 2.32573 2.9328 2.24404 3.01747C2.21436 3.04823 2.18705 3.08105 2.16228 3.11564C2.11889 3.17626 2.08331 3.24232 2.05654 3.31227C2.01454 3.42203 1.99508 3.53912 1.99932 3.65656C2.01607 4.10472 2.40997 4.5 2.92 4.5H16.375C17.1375 4.5 17.8688 4.8029 18.4079 5.34207C18.9471 5.88124 19.25 6.6125 19.25 7.375V14.875C19.25 15.6375 18.9471 16.3688 18.4079 16.9079C17.8688 17.4471 17.1375 17.75 16.375 17.75H2.875C2.1125 17.75 1.38123 17.4471 0.842066 16.9079C0.302899 16.3688 -1.65496e-06 15.6375 -1.65496e-06 14.875V3.70975C-0.0111944 3.33024 0.0528954 2.95219 0.188641 2.59747C0.326792 2.23646 0.536326 1.90701 0.804713 1.62882C1.0731 1.35064 1.39483 1.12944 1.75066 0.978437C2.10629 0.827524 2.48868 0.749833 2.875 0.75H15.25C15.8023 0.75 16.25 1.19772 16.25 1.75C16.25 2.30229 15.8023 2.75 15.25 2.75L2.87433 2.75ZM14.5103 9.5C13.6818 9.5 13.0103 10.1716 13.0103 11C13.0103 11.8284 13.6818 12.5 14.5103 12.5C15.3387 12.5 16.0103 11.8284 16.0103 11C16.0103 10.1716 15.3387 9.5 14.5103 9.5Z"
+      fill="white"
     />
   </svg>
 );
@@ -53,10 +46,63 @@ const Risk = (
   </svg>
 );
 
+const Bet = (
+  <svg
+    width="20"
+    height="16"
+    viewBox="0 0 20 16"
+    fill="none"
+    xmlns="http://www.w3.org/2000/svg"
+  >
+    <g clipPath="url(#clip0_84_1000)">
+      <path
+        d="M3.76868 11.9485C3.88455 11.833 4.04387 11.7656 4.21284 11.7656H19.5361C19.8162 11.7656 19.9562 12.1025 19.7582 12.2998L16.7312 15.3171C16.6154 15.4326 16.456 15.5 16.2871 15.5H0.963755C0.683745 15.5 0.54374 15.1631 0.741678 14.9658L3.76868 11.9485Z"
+        fill="white"
+        style={{ mixBlendMode: "overlay" }}
+      />
+      <path
+        d="M3.76868 11.9485C3.88455 11.833 4.04387 11.7656 4.21284 11.7656H19.5361C19.8162 11.7656 19.9562 12.1025 19.7582 12.2998L16.7312 15.3171C16.6154 15.4326 16.456 15.5 16.2871 15.5H0.963755C0.683745 15.5 0.54374 15.1631 0.741678 14.9658L3.76868 11.9485Z"
+        fill="white"
+        style={{ mixBlendMode: "overlay" }}
+      />
+      <path
+        d="M16.7312 6.27959C16.6154 6.1641 16.4561 6.09673 16.2871 6.09673H0.963775C0.683765 6.09673 0.54376 6.43359 0.741698 6.63089L3.7687 9.64822C3.88457 9.76371 4.04389 9.83109 4.21286 9.83109H19.5362C19.8162 9.83109 19.9562 9.49422 19.7582 9.29692L16.7312 6.27959Z"
+        fill="white"
+        style={{ mixBlendMode: "overlay" }}
+      />
+      <path
+        d="M16.7312 6.27959C16.6154 6.1641 16.4561 6.09673 16.2871 6.09673H0.963775C0.683765 6.09673 0.54376 6.43359 0.741698 6.63089L3.7687 9.64822C3.88457 9.76371 4.04389 9.83109 4.21286 9.83109H19.5362C19.8162 9.83109 19.9562 9.49422 19.7582 9.29692L16.7312 6.27959Z"
+        fill="white"
+        style={{ mixBlendMode: "overlay" }}
+      />
+      <path
+        d="M3.76846 0.682868C3.88915 0.567372 4.04847 0.5 4.21261 0.5H19.5359C19.8159 0.5 19.9559 0.836862 19.758 1.03417L16.731 4.05149C16.6151 4.16699 16.4558 4.23436 16.2868 4.23436H0.963532C0.683522 4.23436 0.543517 3.8975 0.741455 3.70019L3.76846 0.682868Z"
+        fill="white"
+        style={{ mixBlendMode: "overlay" }}
+      />
+      <path
+        d="M3.76846 0.682868C3.88915 0.567372 4.04847 0.5 4.21261 0.5H19.5359C19.8159 0.5 19.9559 0.836862 19.758 1.03417L16.731 4.05149C16.6151 4.16699 16.4558 4.23436 16.2868 4.23436H0.963532C0.683522 4.23436 0.543517 3.8975 0.741455 3.70019L3.76846 0.682868Z"
+        fill="white"
+        style={{ mixBlendMode: "overlay" }}
+      />
+    </g>
+    <defs>
+      <clipPath id="clip0_84_1000">
+        <rect
+          width="19.2"
+          height="15"
+          fill="white"
+          transform="translate(0.65 0.5)"
+        />
+      </clipPath>
+    </defs>
+  </svg>
+);
+
 interface GameControlsProps {
   demo?: boolean;
-  showBonus: boolean;
-  setShowBonus: (show: boolean) => void;
+  showBonus?: boolean;
+  setShowBonus?: (show: boolean) => void;
 }
 
 const GameControls: React.FC<GameControlsProps> = ({
@@ -67,6 +113,8 @@ const GameControls: React.FC<GameControlsProps> = ({
   const [mode, setMode] = useState<"manual" | "auto">("manual");
   const [showBonusAlert, setShowBonusAlert] = useState(true);
   const [activeMode, setActiveMode] = useState<"manual" | "auto">("manual");
+
+  const navigate = useNavigate();
 
   return (
     <>
@@ -117,11 +165,14 @@ const GameControls: React.FC<GameControlsProps> = ({
             {/* Betting Controls */}
             <div className="bg-black/30 px-2 py-1 w-full rounded-xl backdrop-blur-sm border border-white/5">
               <div className="flex justify-between items-center">
-                <div>
-                  <div className="text-white text-lg md:text-xl font-medium">
-                    0
+                <div className="flex gap-2 items-center">
+                  <div>{Bet}</div>
+                  <div>
+                    <div className="text-white text-lg md:text-xl font-medium">
+                      0
+                    </div>
+                    <div className="text-xs text-gray-300">Ballence : 0</div>
                   </div>
-                  <div className="text-xs text-gray-300">Balance: 0</div>
                 </div>
                 <div className="flex gap-2">
                   <button className="bg-white/20 text-white text-xs px-2 py-1 rounded-md hover:bg-white/30 transition-colors">
@@ -146,76 +197,86 @@ const GameControls: React.FC<GameControlsProps> = ({
           </Button>
         </div>
       ) : (
-        <div className={cn("w-full max-w-md mx-auto space-y-4")}>
-          <div className="flex rounded-xl overflow-hidden">
-            <button
-              className={cn(
-                "flex-1 text-white py-3 px-6 transition-colors",
-                mode === "manual" ? "bg-plinko-accent" : "bg-white bg-opacity-5"
-              )}
-              onClick={() => setMode("manual")}
-            >
-              Manual
-            </button>
-            <button
-              className={cn(
-                "flex-1 text-white py-3 px-6 transition-colors",
-                mode === "auto" ? "bg-plinko-accent" : "bg-white bg-opacity-5"
-              )}
-              onClick={() => setMode("auto")}
-            >
-              Auto
-            </button>
-          </div>
-
-          <div className="flex gap-2">
-            <div className="flex-1 bg-white bg-opacity-5 p-3 rounded-xl">
-              <div className="flex items-center gap-2">
-                <Wallet className="w-5 h-5" />
-                <div>
-                  <div className="text-sm text-gray-400">Wallet</div>
-                  <div className="text-white">Balance: 0</div>
+        <div className="h-[22%] md:h-[20%] ">
+          <div className="space-y-3 relative mb-8 mt-8 h-[80%] items-center flex-col justify-center flex">
+            {/* Mode Selector */}
+            <div className="grid grid-cols-2 w-full gap-1 bg-black/50 rounded-lg backdrop-blur-sm p-1">
+              <button
+                className={`rounded-md text-white font-medium transition-colors p-2 ${
+                  activeMode === "manual"
+                    ? "bg-pink-400 shadow-md"
+                    : "bg-transparent hover:bg-white/10"
+                }`}
+                onClick={() => setActiveMode("manual")}
+              >
+                Manual
+              </button>
+              <button
+                className={`rounded-md text-white font-medium transition-colors p-2 ${
+                  activeMode === "auto"
+                    ? "bg-pink-400 shadow-md"
+                    : "bg-transparent hover:bg-white/10"
+                }`}
+                onClick={() => setActiveMode("auto")}
+              >
+                Auto
+              </button>
+            </div>
+            <div className="flex gap-2 flex-1 w-full">
+              <div className="bg-black/50 p-1 mx-auto w-1/2 rounded-xl backdrop-blur-sm  hover:bg-black/40 transition-colors">
+                <div className="flex items-center gap-2 ">
+                  <div className=" p-1.5 rounded-md">{wallet}</div>
+                  <div>
+                    <div className="text-md text-gray-300">Wallet</div>
+                    <div className="text-white text-sm md:text-base">
+                      Ballence: 0
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div className="bg-black/50 p-1 mx-auto w-1/2 rounded-xl backdrop-blur-sm  hover:bg-black/40 transition-colors">
+                <div className="flex items-center gap-2 mx-auto justify-center">
+                  <div className=" p-1.5 rounded-md">{Risk}</div>
+                  <div>
+                    <div className="text-md text-gray-300">High</div>
+                    <div className="text-white text-sm md:text-base">Risk</div>
+                  </div>
                 </div>
               </div>
             </div>
-            <div className="flex-1 bg-white bg-opacity-5 p-3 rounded-xl">
-              <div className="flex items-center gap-2">
-                <Flame className="w-5 h-5 text-plinko-accent" />
-                <div>
-                  <div className="text-sm text-gray-400">High</div>
-                  <div className="text-white">Risk</div>
+
+            {/* Betting Controls */}
+            <div className="bg-black/50 px-2 py-1 w-full rounded-xl backdrop-blur-sm border border-white/5">
+              <div className="flex justify-between items-center">
+                <div className="flex gap-2 items-center">
+                  <div>{Bet}</div>
+                  <div>
+                    <div className="text-white text-lg md:text-xl font-medium">
+                      0
+                    </div>
+                    <div className="text-xs text-gray-300">Bet Amount</div>
+                  </div>
+                </div>
+                <div className="flex gap-2">
+                  <button className="bg-white/20 text-white text-xl px-2 py-1 rounded-md hover:bg-white/30 transition-colors">
+                    1/2
+                  </button>
+                  <button className="bg-white/20 text-white text-xl px-2 py-1 rounded-md hover:bg-white/30 transition-colors">
+                    2x
+                  </button>
+                  <button className="bg-white/20 text-white text-xl px-2 py-1 rounded-md hover:bg-white/30 transition-colors">
+                    MAX
+                  </button>
                 </div>
               </div>
             </div>
           </div>
-
-          {/* Betting Controls */}
-          <div className="flex items-center justify-between bg-white bg-opacity-10 rounded-xl p-3">
-            <div className="flex items-center gap-3">
-              <span className="text-white text-xl font-medium">0</span>
-              <span className="text-gray-400 text-sm">Balance: 0.37</span>
-            </div>
-            <div className="flex gap-2">
-              <button className="bg-white bg-opacity-20 text-white px-3 py-1 rounded-md">
-                1/2
-              </button>
-              <button className="bg-white bg-opacity-20 text-white px-3 py-1 rounded-md">
-                2x
-              </button>
-              <button className="bg-white bg-opacity-20 text-white px-3 py-1 rounded-md">
-                MAX
-              </button>
-              <button className="bg-white bg-opacity-20 text-white p-1 rounded-md">
-                <Wallet className="w-5 h-5" />
-              </button>
-            </div>
-          </div>
-
+          {/* Fund Wallet Button */}
           <Button
-            // onClick={onBonusClick}
-            className="w-full bg-plinko-accent text-white py-4 rounded-xl"
+            onClick={() => navigate("/wallet")}
+            className="w-full bg-[#3a2a40]/30 backdrop-blur-sm text-darkgray py-3 rounded-xl   shadow-lg hover:bg-pink-400/90 transition-colors font-medium"
           >
-            Get Deposit Bonus
+            Please fund your wallet
           </Button>
         </div>
       )}
