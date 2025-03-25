@@ -1,6 +1,7 @@
 import React from "react";
 import { Share2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { Colors } from "@/constants/colors";
 
 interface AddHomeProps {
   showTap: boolean;
@@ -14,7 +15,7 @@ const AddHome: React.FC<AddHomeProps> = ({ showTap, handleLogin }) => {
     <div className="fixed inset-0 bg-black/80 flex items-center justify-center z-50">
       <div className="bg-[#2a2230] w-full overflow-hidden absolute bottom-0">
         <div className="p-8 flex flex-col items-center">
-          <div className="bg-pink-400 w-16 h-16 rounded-2xl mb-6"></div>
+          <div className={`${Colors.pink_bg} w-16 h-16 rounded-2xl mb-6`}></div>
 
           <h2 className="text-white text-2xl font-medium text-center mb-2">
             Add to your home screen to play
@@ -33,7 +34,7 @@ const AddHome: React.FC<AddHomeProps> = ({ showTap, handleLogin }) => {
 
           <Button
             onClick={handleLogin}
-            className="w-full bg-pink-400 text-white hover:bg-pink-500 py-3 rounded-xl"
+            className={`w-full ${Colors.pink_bg} ${Colors.pink_button}  hover:bg-pink-500 py-3 rounded-xl`}
           >
             Continue
           </Button>

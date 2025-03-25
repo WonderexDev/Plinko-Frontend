@@ -94,7 +94,7 @@ const Index = () => {
       setShowRegionBlock(true);
       return;
     }
-    navigate("/demo-mode");
+    navigate("/demo");
   };
 
   const handleBonusSubmit = (e: React.FormEvent) => {

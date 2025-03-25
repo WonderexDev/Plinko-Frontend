@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { useNavigate } from "react-router-dom";
 import { Gift } from "lucide-react";
-import GameBoard from "@/components/GameBoard";
+import { Colors } from "@/constants/colors";
 
 const icons = {
   sol: (
@@ -206,7 +206,7 @@ const WalletPage = () => {
         {/* Back Button */}
         <Button
           onClick={() => navigate("/home")}
-          className="w-full bg-gradient-to-r from-purple-600 to-purple-500 hover:from-purple-700 hover:to-purple-600 text-white py-8 rounded-xl mb-5"
+          className={`w-full ${Colors.back_button} text-white py-8 text-xl rounded-xl mb-5`}
         >
           Back to Plinko
         </Button>
@@ -233,7 +233,7 @@ const WalletPage = () => {
                 }
                 className={`rounded-full px-4 py-1 text-sm ${
                   selectedCrypto === crypto.symbol
-                    ? "bg-pink-500 hover:bg-pink-600 border-none"
+                    ? ` ${Colors.pink_bg} hover:bg-pink-600 border-none ${Colors.pink_button}`
                     : "bg-[#1a1520] border border-gray-600 text-gray-300 hover:bg-gray-800"
                 }`}
               >
@@ -248,12 +248,8 @@ const WalletPage = () => {
           <div className="bg-pink-500 p-3 rounded-lg mb-3">
             <Gift className="w-5 h-5" />
           </div>
-          <p className="text-center text-sm mb-1">
-            150% deposit bonus automatically
-          </p>
-          <p className="text-center text-sm flex items-center">
-            applied to all deposits{" "}
-            <span className="ml-1 text-yellow-300">🤑</span>
+          <p className="text-center text-sm mb-1 w-[70%]">
+            150% deposit bonus automatically applied to all deposits 🤑
           </p>
         </div>
       </div>

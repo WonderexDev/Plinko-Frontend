@@ -1,6 +1,5 @@
 import { useState, useEffect, useRef } from "react";
 import { MoreHorizontal } from "lucide-react";
-import { set } from "date-fns";
 import { useNavigate } from "react-router-dom";
 
 interface HeaderProps {
@@ -88,7 +87,7 @@ const Header: React.FC<HeaderProps> = ({ demo, auth }) => {
           {isOpen && (
             <div
               ref={musicRef}
-              className="absolute right-0 mt-2 w-60 right-3 bg-gray-100/30 z-10 max-w-md p-0 border border-white/10 overflow-hidden rounded-3xl  backdrop-blur-md bg-gray/5 shadow-2xl"
+              className="absolute right-0 mt-2 w-60 right-3 bg-black bg-opacity-30 backdrop-blur-xl z-10 max-w-md p-0 border border-white/10 overflow-hidden rounded-3xl shadow-2xl"
             >
               <div className="text-white">
                 {/* Title and artist */}
@@ -173,13 +172,13 @@ const Header: React.FC<HeaderProps> = ({ demo, auth }) => {
           role="button"
           tabIndex={0}
           onClick={() => setShowMenu(true)}
-          className="text-white bg-opacity-10 rounded-full relative border border-white border-[2px] cursor-pointer"
+          className="text-white bg-opacity-20 rounded-full relative border border-white border-[2px] cursor-pointer"
         >
           <MoreHorizontal className="w-5 h-5" />
           {showMenu && (
             <div
               ref={menuRef}
-              className="absolute right-0 mt-2 w-48 bg-white bg-opacity-30 backdrop-blur-lg rounded-md shadow-lg z-10"
+              className="absolute right-0 mt-2 w-48 bg-black bg-opacity-30 backdrop-blur-xl rounded-md shadow-lg z-10"
             >
               {menuItems.map((item, index) => (
                 <button

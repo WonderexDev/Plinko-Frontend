@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { useNavigate, useLocation } from "react-router-dom";
 import { ChevronLeft, ArrowUpDown, Copy } from "lucide-react";
+import { Colors } from "@/constants/colors";
 
 const icons = {
   sol: (
@@ -190,7 +191,7 @@ const DepositAddressPage = () => {
         <Button
           onClick={() => navigate(-1)}
           variant="outline"
-          className="w-full bg-[#2a2230] hover:bg-[#352a3d] text-white border-none py-3 rounded-xl mb-6 flex items-center justify-center gap-2"
+          className={`w-full ${Colors.back_button} hover:bg-[#352a3d] text-white border-none py-3 rounded-xl mb-6 flex items-center justify-center gap-2`}
         >
           <ChevronLeft className="w-5 h-5" />
           <span>Back</span>
@@ -273,7 +274,9 @@ const DepositAddressPage = () => {
             </div>
           </div>
 
-          <Button className="w-full bg-gradient-to-r from-pink-500 to-pink-600 hover:from-pink-600 hover:to-pink-700 text-white py-3 rounded-xl">
+          <Button
+            className={`w-full ${Colors.pink_bg} ${Colors.pink_button} hover:from-pink-600 hover:to-pink-700 text-white py-3 rounded-xl`}
+          >
             Withdraw
           </Button>
         </div>

@@ -4,6 +4,8 @@ import { ChevronLeft, Lock, ArrowRight } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 import { useNavigate } from "react-router-dom";
 
+import { Colors } from "@/constants/colors";
+
 const LoginPage = () => {
   const { toast } = useToast();
   const [email, setEmail] = useState("");
@@ -114,7 +116,7 @@ const LoginPage = () => {
             />
           )}
           <div
-            className="text-pink-500 text-center mx-auto"
+            className="text-[#FF80CF] text-center mx-auto"
             onClick={() => {
               if (showVerifyEmail) {
                 handleResendEmail();
@@ -133,7 +135,7 @@ const LoginPage = () => {
             <Button
               onClick={handleEmailSubmit}
               type="submit"
-              className="w-full bg-pink-400 hover:bg-pink-500 text-white py-4 rounded-xl font-medium transition-all"
+              className={`w-full ${Colors.pink_bg} ${Colors.pink_button} hover:bg-pink-500 text-xl py-4 rounded-xl font-medium transition-all`}
             >
               Continue
             </Button>
@@ -143,7 +145,7 @@ const LoginPage = () => {
               <Button
                 onClick={handleBack}
                 variant="outline"
-                className="px-6 py-5 w-[30%] rounded-xl bg-white/5 text-white border border-white/10 hover:bg-white/10 transition-all"
+                className="px-6 py-5 w-[30%] rounded-xl bg-white/5 text-white text-xl border border-white/10 hover:bg-white/10 transition-all"
               >
                 <ChevronLeft className="w-4 h-4 mr-2" /> Back
               </Button>
@@ -152,7 +154,7 @@ const LoginPage = () => {
               <Button
                 onClick={handleBack}
                 variant="outline"
-                className="px-6 py-5 w-[30%] rounded-xl bg-white/5 text-white border border-white/10 hover:bg-white/10 transition-all"
+                className="px-6 py-5 w-[30%] rounded-xl bg-white/5 text-xl text-white border border-white/10 hover:bg-white/10 transition-all"
               >
                 <ChevronLeft className="w-4 h-4 mr-2" /> Back
               </Button>
@@ -160,7 +162,7 @@ const LoginPage = () => {
             {showVerifyEmail && (
               <Button
                 onClick={(e) => handleProceed(e)}
-                className="px-8 py-5 w-[80%] rounded-xl bg-plinko-accent text-white hover:bg-plinko-accent/90 transition-all flex items-center justify-center gap-2 shadow-lg shadow-plinko-accent/20"
+                className={`px-8 py-5 w-[80%] rounded-xl ${Colors.pink_bg} ${Colors.pink_button} hover:bg-plinko-accent/90 transition-all flex items-center justify-center gap-2 shadow-lg shadow-plinko-accent/20`}
               >
                 Proceed
                 <ArrowRight className="w-4 h-4 ml-1" />
@@ -169,7 +171,7 @@ const LoginPage = () => {
             {showPassword && (
               <Button
                 onClick={(e) => handleStart(e)}
-                className="px-8 py-5 w-[80%] rounded-xl bg-plinko-accent text-white hover:bg-plinko-accent/90 transition-all flex items-center justify-center gap-2 shadow-lg shadow-plinko-accent/20"
+                className={`px-8 py-5 w-[80%] rounded-xl ${Colors.pink_bg} ${Colors.pink_button}  hover:bg-plinko-accent/90 transition-all flex items-center justify-center gap-2 shadow-lg shadow-plinko-accent/20`}
               >
                 Start Playing <ArrowRight className="w-4 h-4 ml-1" />
               </Button>
@@ -179,7 +181,7 @@ const LoginPage = () => {
             <Button
               onClick={handleResetPassword}
               type="submit"
-              className="w-full bg-pink-400 hover:bg-pink-500 text-white py-4 rounded-xl font-medium transition-all"
+              className={`w-full ${Colors.pink_bg} ${Colors.pink_button} hover:bg-pink-500 text-white py-4 rounded-xl font-medium transition-all`}
             >
               Start Playing
             </Button>
