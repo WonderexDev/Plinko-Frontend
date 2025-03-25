@@ -93,6 +93,14 @@ const DemoMode = () => {
           demo={true}
           showBonus={showBonus}
           setShowBonus={setShowBonus}
+          fund={false}
+          isSimulating={false}
+          setIsSimulating={() => {}}
+          activeMode={null}
+          setActiveMode={() => {}}
+          autoCount={0}
+          setAutoCount={() => {}}
+          handlePlaceBet={() => {}}
         />
       </div>
 
